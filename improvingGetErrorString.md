@@ -2,6 +2,7 @@
 
 ### Question 1: Code Review
 A fellow developer has asked you to review the following code. Please provide your feedback.
+Note: I am assuming this is in C
 ```C
 1.  char *GetErrorString( int x )
 2.  {
