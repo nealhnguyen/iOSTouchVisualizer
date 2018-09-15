@@ -84,7 +84,7 @@ With GetErrorString
    * Then you can keep the final assignment of the null terminating character in this case (or some other way, just make sure errorString is null terminated)
    * also make sure you fill the memory correclty with whatever method you choose
 
-Let me know if you have any questions. I did not cover every case
+Let me know if you have any questions.
 
 
 
