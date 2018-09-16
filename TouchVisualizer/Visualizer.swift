@@ -13,6 +13,8 @@ final public class Visualizer:NSObject {
     fileprivate var config: Configuration!
     fileprivate var touchViews = [TouchView]()
     fileprivate var previousLog = ""
+    fileprivate var prevLocations = [UITouch: [CGPoint]]()
+    fileprivate var numTaps = 5;
     
     // MARK: - Object life cycle
     private override init() {
@@ -54,6 +56,41 @@ final public class Visualizer:NSObject {
         for view in self.touchViews {
             view.removeFromSuperview()
         }
+    }
+}
+
+extension Visualizer {
+    // MARK: - Filter Functions
+    func resizeBasedOnTaps(history: inout [CGPoint], numTaps: Int) {
+        // if the array is too big, remove the oldest points
+        if history.count > numTaps {
+            history.removeFirst(history.count - numTaps)
+        }
+    }
+    
+    func uniformMovingAvgFilter(newPoint: CGPoint, history: inout [CGPoint], numTaps: Int) -> CGPoint {
+        history.append(newPoint)
+        
+        resizeBasedOnTaps(history: &history, numTaps: numTaps)
+        
+        var x = CGFloat(0)
+        var y = CGFloat(0)
+        
+        for point in history {
+            x += point.x
+            y += point.y
+        }
+        
+        x /= CGFloat(history.count)
+        y /= CGFloat(history.count)
+        
+        return CGPoint(x: x, y: y)
+    }
+    
+    func harmonicMovingAvgFilter(history: [CGPoint], numTaps: [uint]) -> CGPoint {
+        // TODO implement this
+        
+        return CGPoint(x:0, y:0)
     }
 }
 
@@ -156,12 +193,24 @@ extension Visualizer {
                 view.config = Visualizer.sharedInstance.config
                 view.touch = touch
                 view.beginTouch()
-                view.center = touch.location(in: topWindow)
+                
+                // Add new touch
+                prevLocations[touch] = []
+                //view.center = touch.location(in: topWindow)
+                view.center = self.uniformMovingAvgFilter(
+                    newPoint: touch.location(in: topWindow),
+                    history: &self.prevLocations[touch]!,
+                    numTaps: self.numTaps)
+                
                 topWindow.addSubview(view)
                 log(touch)
             case .moved:
                 if let view = findTouchView(touch) {
-                    view.center = touch.location(in: topWindow)
+                    //view.center = touch.location(in: topWindow)
+                    view.center = self.uniformMovingAvgFilter(
+                        newPoint: touch.location(in: topWindow),
+                        history: &self.prevLocations[touch]!,
+                        numTaps: self.numTaps)
                 }
                 
                 log(touch)
@@ -176,6 +225,7 @@ extension Visualizer {
                         view.removeFromSuperview()
                         self.log(touch)
                     })
+                    self.prevLocations.removeValue(forKey: touch)
                 }
                 
                 log(touch)

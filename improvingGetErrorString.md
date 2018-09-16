@@ -88,5 +88,6 @@ With GetErrorString
 
 Let me know if you have any questions.
 
+### Question 2
 
-
+https://medium.com/blueeast/how-to-use-moving-average-filter-to-counter-noisy-data-signal-5b530294a12e
