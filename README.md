@@ -2,9 +2,17 @@
 
 This app shows fingers on the screen with circular views under them. It supports multiple fingers on the screen and tracks the fingers as they move around.
 
+## Running The App
+
 To run the app, open `./Example/Example.xcodeproj` and build code onto an iphone device. It should work right out the box after changing the team and resigning the code. To change the number of taps for the uniform filter on the location of the visualizer, change the variable `numTaps` on line 18 in `./TouchVisualizer/Visualizer.swift`
 
 For an in depth theoretical analysis, take a look at below.
+
+## Important Notes
+
+Work for the Filter analysis can be found at `./FIR Filter Analysis`
+
+Usage videos for the app can be found at `./Uniform Filter Delay/`
 
 ## Question 1: Code Review
 **A fellow developer has asked you to review the following code. Please provide your feedback.**
