@@ -96,31 +96,31 @@ Let me know if you have any questions.
 
 ## Question 2
 
-**You are asked to filter a noisy, but slowly-shifting sensor signal using a low-pass, finite impulse response (FIR) filter.  Derive the mean delay, and expected SNR boost (noise standard deviation of output compared to input) for two filter variations, plotting your results:**
+### You are asked to filter a noisy, but slowly-shifting sensor signal using a low-pass, finite impulse response (FIR) filter.  Derive the mean delay, and expected SNR boost (noise standard deviation of output compared to input) for two filter variations, plotting your results:
 
-**N filter taps, uniformly weighted:**
+### N filter taps, uniformly weighted:
 * `y[n] = (x[n] + ... + x[n-N+1])/N`
 
-**M filter taps, harmonically weighted:**
+### M filter taps, harmonically weighted:
 * `z[n] = (M*x[n] + (M-1)*x[n-1] ... + 1*x[n-M+1]) / (M*(M+1)/2`
 
 *Note all work is shown in `FIR Filter Analysis.pdf`*
 
 *I was also unable to finish analysis on the harmonically weighted filter, so I will provide my intuiton and thoughts* 😭
 
-**a) What depths (N and M) are needed to boost the SNR by a factor of 5?**
+### a) What depths (N and M) are needed to boost the SNR by a factor of 5?
 
 From looking around I found that the SNR boost for the uniformly weighted filter is N^1/2. Thus N=25 for the uniformly weighted filter will boost SNR by a factor of 5.
 
 The harmonically weighted filter will give more precedence to the recent points. This tells me that it works less to average out past signals and will be more prone to noise. So it would probably require a much larger number of taps (M) than N to obtain an SNR boost of 5.
 
-**b) Which filter has the lowest mean delay at the required depth?**
+### b) Which filter has the lowest mean delay at the required depth?
 
 The uniformly weighted moving average is calculated to have a delay of N/2. The harmonically weighted filter is calculated to have a delay of M/3. Thus the harmonically weighted filter has a lower delay when using the same number of taps as the uniformly weighted filter.
 
 I can't intuitively think of a reason to support an answer. I would need to figure out how to calculate the SNR boost of the harmonically weighted filter. At that point simple algebra to solve the M number of taps to needed to get an SNR boost of 5 could then be plugged into M/3 to determine if it is smaller than 25/2 (N/2).
 
-**c) Which setup do you recommend as a tradeoff between SNR and delay?**
+### c) Which setup do you recommend as a tradeoff between SNR and delay?
 
 The things that must be considered for this problem are:
 1. the optimal number of taps for SNR boost and delay
