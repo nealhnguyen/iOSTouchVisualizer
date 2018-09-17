@@ -2,9 +2,6 @@
 //  KeyboardDemoViewController.swift
 //  Example
 //
-//  Created by MORITANAOKI on 2016/12/17.
-//  Copyright © 2016年 molabo. All rights reserved.
-//
 
 import UIKit
 

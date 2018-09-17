@@ -14,7 +14,7 @@ final public class Visualizer:NSObject {
     fileprivate var touchViews = [TouchView]()
     fileprivate var previousLog = ""
     fileprivate var prevLocations = [UITouch: [CGPoint]]()
-    fileprivate var numTaps = 5;
+    fileprivate var numTaps = 25;
     
     // MARK: - Object life cycle
     private override init() {

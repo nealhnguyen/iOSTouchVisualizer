@@ -1,9 +1,9 @@
 # HID Homework Interview
 
-### Question 1: Code Review
-A fellow developer has asked you to review the following code. Please provide your feedback.
+## Question 1: Code Review
+**A fellow developer has asked you to review the following code. Please provide your feedback.**
 
-Note: I am assuming this is in C
+*Note: I am assuming this is in C*
 ```C
 1.  char *GetErrorString( int x )
 2.  {
@@ -88,6 +88,43 @@ With GetErrorString
 
 Let me know if you have any questions.
 
-### Question 2
+## Question 2
 
-https://medium.com/blueeast/how-to-use-moving-average-filter-to-counter-noisy-data-signal-5b530294a12e
+**You are asked to filter a noisy, but slowly-shifting sensor signal using a low-pass, finite impulse response (FIR) filter.  Derive the mean delay, and expected SNR boost (noise standard deviation of output compared to input) for two filter variations, plotting your results:**
+
+**N filter taps, uniformly weighted:**
+* `y[n] = (x[n] + ... + x[n-N+1])/N`
+
+**M filter taps, harmonically weighted:**
+* `z[n] = (M*x[n] + (M-1)*x[n-1] ... + 1*x[n-M+1]) / (M*(M+1)/2`
+
+*Note all work is shown in `FIR Filter Analysis.pdf`*
+
+*I was also unable to finish analysis on the harmonically weighted filter, so I will provide my intuiton and thoughts*
+
+**a) What depths (N and M) are needed to boost the SNR by a factor of 5?**
+
+From looking around I found that the SNR boost for the uniformly weighted filter is N^1/2. Thus N=25 for the uniformly weighted filter will boost SNR by a factor of 5.
+
+The harmonically weighted filter will give more precedence to the recent points. This tells me that it works less to average out past signals and will be more prone to noise. So it would probably require a much larger number of taps (M) than N to obtain an SNR boost of 5.
+
+**b) Which filter has the lowest mean delay at the required depth?**
+
+The uniformly weighted moving average is calculated to have a delay of N/2. The harmonically weighted filter is calculated to have a delay of M/3. Thus the harmonically weighted filter has a lower delay when using the same number of taps as the uniformly weighted filter.
+
+I can't intuitively think of a reason to support an answer. I would need to figure out how to calculate the SNR boost of the harmonically weighted filter. At that point simple algebra to solve the M number of taps to needed to get an SNR boost of 5 could then be plugged into M/3 to determine if it is smaller than 25/2 (N/2).
+
+**c) Which setup do you recommend as a tradeoff between SNR and delay?**
+
+The things that must be considered for this problem are:
+1. the optimal number of taps for SNR boost and delay
+1. the speed and SNR boost requirements
+1. the amount of noise we can generally expect
+
+From graphing just the tradeoff of SNR boost and delay for the uniformly weighted filter. I find that you get diminishing returns after 4 taps. I found that it takes 25 taps to get an SNR boost of 5. That is quite far from the optimal tap count for the uniformly weighted filter. You must weigh how far from the optimal number of taps we are going for each filter. *I determined the optimal tap count by finding the point when SNR boost and delay intersect intersect on the same scale. This is shown in my work. In hindsight, I should normalize them because having an SNR boost of 1 does not necessarily have an equal importance of having a delay of 1.*
+
+As noted in the previous paragraph, we must understand what SNR and delay is ideal. Through human interfacing surveys, I'll assume that we have determined that an SNR boost of 5 is ideal as stated in the problem statement. Thus it just becomes a math game of which filter has a lower delay for that SNR. But one caveat is that if increasing the SNR threshold slightly lower introduces a much lower delay in one filter, it is worth exploring a lower SNR boost requirement and doing the same calculation for which filter introduces the smallest delay.
+
+Finally, understanding amount of noise we must deal with is important. If noise is relatively small, it is worth lowering the SNR boost requirements. I will again assume that thorugh user studies and research, an SNR of 5 is best.
+
+## Question 3

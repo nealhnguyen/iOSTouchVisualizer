@@ -2,9 +2,6 @@
 //  ViewController.swift
 //  Example
 //
-//  Created by MORITA NAOKI on 2015/05/06.
-//  Copyright (c) 2015年 molabo. All rights reserved.
-//
 
 import UIKit
 

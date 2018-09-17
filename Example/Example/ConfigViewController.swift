@@ -2,9 +2,7 @@
 //  ConfigViewController.swift
 //  Example
 //
-//  Created by MORITA NAOKI on 2015/01/25.
-//  Copyright (c) 2015年 molabo. All rights reserved.
-//
+
 
 import UIKit
 
@@ -12,6 +10,9 @@ final class ConfigViewController: UITableViewController {
 
     @IBOutlet weak var timerCell: UITableViewCell!
     @IBOutlet weak var touchRadiusCell: UITableViewCell!
+    @IBOutlet weak var uniformFIRCell: UITableViewCell!
+    @IBOutlet weak var numOfUniformFIRTapsCell: UITableViewCell!
+    @IBOutlet weak var numOfUniformFIRTapsField: UITextField!
     @IBOutlet weak var logCell: UITableViewCell!
 
     @IBOutlet weak var blueColorCell: UITableViewCell!
@@ -32,6 +33,10 @@ final class ConfigViewController: UITableViewController {
         super.viewDidAppear(animated)
         Visualizer.start()
         updateCells()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        numOfUniformFIRTapsField.resignFirstResponder()
     }
 
     // MARK: - TableView Delegate
@@ -58,6 +63,12 @@ final class ConfigViewController: UITableViewController {
             }
             config.showsTouchRadius = !config.showsTouchRadius
         }
+        if cell == uniformFIRCell {
+            config.useUniformFIR = !config.useUniformFIR
+        }
+        if cell == numOfUniformFIRTapsCell {
+            config.numUniformFIRTaps = Int(numOfUniformFIRTapsField.text!)!
+        }
         if cell == logCell {
             config.showsLog = !config.showsLog
         }
@@ -76,7 +87,7 @@ final class ConfigViewController: UITableViewController {
     }
 
     func updateCells() {
-        let boolCells = [timerCell, touchRadiusCell, logCell]
+        let boolCells = [timerCell, touchRadiusCell, logCell, uniformFIRCell]
         for cell in boolCells {
             cell?.detailTextLabel?.text = "false"
         }
@@ -91,8 +102,14 @@ final class ConfigViewController: UITableViewController {
         if config.showsTouchRadius {
             touchRadiusCell.detailTextLabel?.text = "true"
         }
+        if config.useUniformFIR {
+            uniformFIRCell.detailTextLabel?.text = "true"
+        }
+        if config.numUniformFIRTaps > 0 {
+            numOfUniformFIRTapsField.attributedText = NSMutableAttributedString(string:  String(config.numUniformFIRTaps))
+        }
         if config.showsLog {
-            logCell.detailTextLabel?.text = "true"
+            uniformFIRCell.detailTextLabel?.text = "true"
         }
         if config.color == colors["blue"] {
             blueColorCell.accessoryType = .checkmark

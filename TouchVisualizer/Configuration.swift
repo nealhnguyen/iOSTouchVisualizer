@@ -49,6 +49,16 @@ public struct Configuration {
     Shows log. This will affect performance. Make sure showing logs only in development environment
     */
     public var showsLog = false
+    
+    /**
+     Enables the Uniform Moving Average Filter. This will afffect performance, but smooth out the circle movement.
+     */
+    public var useUniformFIR = false
+    
+    /**
+     Sets the number of taps the uniform Moving Average FIR filter uses.
+     */
+    public var numUniformFIRTaps = 1
 
     public init(){}
 }
