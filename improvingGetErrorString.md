@@ -100,7 +100,7 @@ Let me know if you have any questions.
 
 *Note all work is shown in `FIR Filter Analysis.pdf`*
 
-*I was also unable to finish analysis on the harmonically weighted filter, so I will provide my intuiton and thoughts*
+*I was also unable to finish analysis on the harmonically weighted filter, so I will provide my intuiton and thoughts* 😭
 
 **a) What depths (N and M) are needed to boost the SNR by a factor of 5?**
 
@@ -128,3 +128,12 @@ As noted in the previous paragraph, we must understand what SNR and delay is ide
 Finally, understanding amount of noise we must deal with is important. If noise is relatively small, it is worth lowering the SNR boost requirements. I will again assume that thorugh user studies and research, an SNR of 5 is best.
 
 ## Question 3
+
+1. App to show fingers on screen 👍
+2. Updating XY coordinates with uniform filter 👍
+3. Updating XY coordinates with harmonic filter 📌 TODO
+4. Visualize touches passing throuhg both filters simultaneously. 📌 TODO
+5. Play with number of taps with uniform filter 👍
+6. Play with number of taps with harmonic filter 📌 TODO
+
+The user experience is reduced as I increase the number of taps for the uniform filter. It starts mattering at N = 1000. I did not notice much benifit to adding the filter for the touch visualizer. But I can see where it would be useful when analyzing for general swipe commands. At which point, it seemed N=10 was when I saw things slow down past a threshold I was okay with. 

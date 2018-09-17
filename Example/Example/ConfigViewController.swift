@@ -11,6 +11,7 @@ final class ConfigViewController: UITableViewController {
     @IBOutlet weak var timerCell: UITableViewCell!
     @IBOutlet weak var touchRadiusCell: UITableViewCell!
     @IBOutlet weak var uniformFIRCell: UITableViewCell!
+    /* HERE I ATTEMPTED TO MAKE THE NUMBER OF TAPS DYNAMIC AND CHANGEABLE WITHIN THE APP UNFINISHED TODO*/
     @IBOutlet weak var numOfUniformFIRTapsCell: UITableViewCell!
     @IBOutlet weak var numOfUniformFIRTapsField: UITextField!
     @IBOutlet weak var logCell: UITableViewCell!

@@ -14,7 +14,8 @@ final public class Visualizer:NSObject {
     fileprivate var touchViews = [TouchView]()
     fileprivate var previousLog = ""
     fileprivate var prevLocations = [UITouch: [CGPoint]]()
-    fileprivate var numTaps = 25;
+    /* THIS IS WHERE YOU ACTUALLY SET THE numTaps for the uniform filter */
+    fileprivate var numTaps = 1000;
     
     // MARK: - Object life cycle
     private override init() {
@@ -60,6 +61,8 @@ final public class Visualizer:NSObject {
 }
 
 extension Visualizer {
+    /* IMPLEMENTATION FOR MOVING AVERAGE FILTER */
+    
     // MARK: - Filter Functions
     func resizeBasedOnTaps(history: inout [CGPoint], numTaps: Int) {
         // if the array is too big, remove the oldest points
