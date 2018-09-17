@@ -136,4 +136,6 @@ Finally, understanding amount of noise we must deal with is important. If noise 
 5. Play with number of taps with uniform filter 👍
 6. Play with number of taps with harmonic filter 📌 TODO
 
-The user experience is reduced as I increase the number of taps for the uniform filter. It starts mattering at N = 1000. I did not notice much benifit to adding the filter for the touch visualizer. But I can see where it would be useful when analyzing for general swipe commands. At which point, it seemed N=10 was when I saw things slow down past a threshold I was okay with. 
+The user experience is reduced as I increase the number of taps for the uniform filter. It starts mattering at N = 1000. I did not notice much benifit to adding the filter for the touch visualizer. But I can see where it would be useful when analyzing for general swipe commands. At which point, it seemed N=10 was when I saw things slow down past a threshold I was okay with.
+
+My results are shown in the `./Uniform Filter Delay/` folder with videos for various number of taps.
